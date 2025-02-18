@@ -1,0 +1,70 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figma Plugin UI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Selected Layer Data</h3>
+    <div id="output">
+      <p>Select a layer in Figma and run the plugin.</p>
+    </div>
+
+    <script>
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage;
+
+        console.log("Received Message:", message); // Debugging
+
+        if (message.type === "error") {
+          document.getElementById(
+            "output"
+          ).innerHTML = `<p style="color:red;"><b>Error:</b> ${message.message}</p>`;
+        } else if (message.type === "nodes") {
+          let date = getTokenName(message.data);
+          const names = extractNames(message.data);
+          document.getElementById("output").innerHTML = `<pre>${JSON.stringify(
+            names,
+            null,
+            2
+          )}</pre>`;
+        }
+      };
+      function extractNames(array) {
+        return array.map((item) => {
+          const transformed = { name: item.name };
+
+          // If children exist, recursively process the children array
+          if (Array.isArray(item.children) && item.children.length > 0) {
+            transformed.children = extractNames(item.children);
+          }
+
+          return transformed;
+        });
+      }
+      async function getTokenName(array) {
+        // array.forEach(async (element) => {
+        //   const variable = await figma.variables.getVariableByIdAsync(
+        //     variableId
+        //   );
+        // });
+      }
+    </script>
+  </body>
+</html>

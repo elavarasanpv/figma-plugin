@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "lib": ["ES6", "DOM"],
+    "outDir": "./dist",
+    "strict": true,
+    "types": ["@figma/plugin-typings"],
+    "skipLibCheck": true
+  }
+}
+
+
+
