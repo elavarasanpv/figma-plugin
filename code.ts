@@ -45,7 +45,7 @@ figma.on("run", async () => {
    const variable = await figma.variables.getVariableByIdAsync(
          "VariableID:e172ccf68b7842151b3737bbf68dd37eef88613f/14505:500"
         );
-        console.log(variable?.name,'local',localVariables, "variable name");
+        console.log(variable?.name,'local',localVariables, "variable");
 
   figma.ui.postMessage({ type: "nodes", data: cleanedNodes });
   console.log("Post message");

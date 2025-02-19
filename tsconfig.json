@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "strict": true,
     "types": ["@figma/plugin-typings"],
+    "typeRoots": ["node_modules/@types", "node_modules/@figma/plugin-typings"],
     "skipLibCheck": true
   }
 }
